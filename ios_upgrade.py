@@ -4,7 +4,7 @@ from getpass import getpass
 from netmiko import ConnectHandler, FileTransfer
 
 def main():
-	"""SCript to login to a Cisco IOS device"""
+	"""Script to login to a Cisco IOS device"""
 	ip_addr = input("Enter Cisco device IP address: ")
 	my_pass = getpass()
 	start_time= datetime.now()
