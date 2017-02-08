@@ -40,8 +40,8 @@ def main():
         
         # Image file settings
         dest_file_system = 'bootflash:'
-        source_file = 'something\\asr1000-universalk9.16.04.01.SPA.bin' # Use absolute path
-        dest_file = 'asr1000-universalk9.16.04.01.SPA.bin' 
+        source_file = 'something\\image_name' # Use absolute path
+        dest_file = 'image_name' 
 
         with FileTransfer(ssh_conn, source_file=source_file, dest_file=dest_file, file_system=dest_file_system) as scp_transfer:
                 if not scp_transfer.check_file_exists():
