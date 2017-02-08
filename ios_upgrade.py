@@ -1,3 +1,7 @@
+# This test script is based on netmiko written by Kirk Byers.
+# For the netmiko library and reelvant information,
+# please see https://github.com/ktbyers/netmiko
+
 from datetime import datetime
 from getpass import getpass
 from netmiko import ConnectHandler, FileTransfer
@@ -40,7 +44,7 @@ def main():
         
         # Image file settings
         dest_file_system = 'bootflash:'
-        source_file = 'something\\image_name' # Use absolute path
+        source_file = 'absolute_path\\image_name' # Use absolute path
         dest_file = 'image_name' 
 
         with FileTransfer(ssh_conn, source_file=source_file, dest_file=dest_file, file_system=dest_file_system) as scp_transfer:
