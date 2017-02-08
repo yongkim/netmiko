@@ -65,7 +65,8 @@ def main():
         
         print("\nWrite mem")
         output = ssh_conn.send_command('write mem')
-
+        print(output)
+        
         print("\nVerifying state")
         output = ssh_conn.send_command('show boot')
         print(output)
