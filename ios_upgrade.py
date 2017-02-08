@@ -1,6 +1,20 @@
 # This test script is based on netmiko written by Kirk Byers.
 # For the netmiko library and reelvant information,
 # please see https://github.com/ktbyers/netmiko
+'''
+For a new router upgrade/config the following minimal configuration on the router will be required prior to using this script:
+
+for SSH:
+        hostname
+        domain name
+        RSA key generation
+        IP address to reach the router
+        local user defined
+        vty line to use local authentication
+
+for SCP:
+        ip scp server enable
+'''
 
 from datetime import datetime
 from getpass import getpass
