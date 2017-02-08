@@ -1,7 +1,7 @@
-# This test script is based on netmiko written by Kirk Byers.
+# This test script is based on netmiko written by (c) Kirk Byers.
 # For the netmiko library and reelvant information,
 # please see https://github.com/ktbyers/netmiko
-'''
+"""
 For a new router upgrade/config the following minimal configuration on the router will be required prior to using this script:
 
 for SSH:
@@ -14,14 +14,14 @@ for SSH:
 
 for SCP:
         ip scp server enable
-'''
+"""
 
 from datetime import datetime
 from getpass import getpass
 from netmiko import ConnectHandler, FileTransfer
 
 def main():
-        """Script to login to a Cisco IOS device"""
+        # Script to login to a Cisco IOS device
         ip_addr = input("Enter Cisco device IP address: ")
         my_pass = getpass()
         start_time= datetime.now()
@@ -39,7 +39,8 @@ def main():
         print("\nLogging in to Cisco Device")
         ssh_conn = ConnectHandler(**net_device)
         print
-        
+
+        # Show current version of the software
         print("\nView software version")
         output = ssh_conn.send_command ('show ver')
         print(output)
@@ -75,26 +76,30 @@ def main():
                 else:
                         raise ValueError("MD5 hash between source and destination do not match")
 
+        # Set the boot configuration
         print("\nSending boot commands")
         full_file_name = "{}/{}".format(dest_file_system, dest_file)
         boot_cmd = "boot system flash {}".format(full_file_name)
         output = ssh_conn.send_config_set([boot_cmd])
         print(output)
         
+        # Save the configuration
         print("\nWrite mem")
         output = ssh_conn.send_command('write mem')
         print(output)
-        
+
+        # Verify boot parameters
         print("\nVerifying state")
         output = ssh_conn.send_command('show boot')
         print(output)
 
+        # Reboot
         print("\nReload")
         output = ssh_conn.send_command_timing('reload')
         output += ssh_conn.send_command_timing('y')
         print(output)
         
-        print("\n>>>> {}".format(datetime.now() - start_time))
+        print("\n>>>> Time taken: {}".format(datetime.now() - start_time))
         print("\n")
 
 if __name__ == "__main__":
