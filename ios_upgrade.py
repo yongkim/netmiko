@@ -25,6 +25,11 @@ def main():
         ip_addr = input("Enter Cisco device IP address: ")
         my_pass = getpass()
         start_time= datetime.now()
+
+        log_file = open("logging.txt","w")
+
+        log_file.write("Starting...")
+
         print(">>>> {}".format(start_time))
         
         net_device = {
@@ -59,8 +64,8 @@ def main():
         
         # Image file settings
         dest_file_system = 'bootflash:'
-        source_file = 'absolute_path\\image_name' # Use absolute path
-        dest_file = 'image_name' 
+        source_file = 'C:\\Users\\yongk\\Documents\\Images\\Cisco\\asr1000-universalk9.16.04.01.SPA.bin' # Use absolute path
+        dest_file = 'asr1000-universalk9.16.04.01.SPA.bin' 
 
         with FileTransfer(ssh_conn, source_file=source_file, dest_file=dest_file, file_system=dest_file_system) as scp_transfer:
                 if not scp_transfer.check_file_exists():
@@ -101,6 +106,8 @@ def main():
         
         print("\n>>>> Time taken: {}".format(datetime.now() - start_time))
         print("\n")
+
+        log_file.close()
 
 if __name__ == "__main__":
         main()
